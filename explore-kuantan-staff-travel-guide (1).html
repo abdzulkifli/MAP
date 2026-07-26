@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="theme-color" content="#073b4c" />
+<title>Explore Kuantan — Staff Retreat Travel Guide</title>
+<link rel="preconnect" href="https://unpkg.com">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+<script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+<style>
+:root{--navy:#073b4c;--teal:#0f766e;--cream:#f7f5ef;--ink:#16242c;--muted:#667781;--gold:#d69e2e;--green:#198754;--blue:#1677c8;--orange:#e87922;--purple:#7651b7;--card:#ffffff;--line:#dce6e8;--shadow:0 14px 38px rgba(7,59,76,.14)}
+*{box-sizing:border-box}html,body{height:100%;margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;color:var(--ink);background:#eaf2f3}button,a{font:inherit}.app{height:100%;display:grid;grid-template-columns:minmax(360px,420px) 1fr;overflow:hidden}.sidebar{height:100%;overflow:auto;background:linear-gradient(180deg,#fff 0%,#f4f8f8 100%);border-right:1px solid #d6e2e4;position:relative;z-index:800}.hero{padding:28px 26px 24px;background:radial-gradient(circle at 88% 5%,rgba(255,255,255,.25),transparent 25%),linear-gradient(135deg,#073b4c,#0f766e);color:#fff}.eyebrow{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.16em;opacity:.82}.hero h1{font-size:34px;line-height:1.02;margin:9px 0 10px;letter-spacing:-.04em}.hero h1 span{color:#ffe29a}.hero p{font-size:14px;line-height:1.55;margin:0;opacity:.9}.hero-actions{display:flex;gap:8px;margin-top:18px;flex-wrap:wrap}.btn{border:0;border-radius:12px;padding:10px 13px;font-weight:800;cursor:pointer;display:inline-flex;align-items:center;gap:7px;text-decoration:none;transition:.2s}.btn:hover{transform:translateY(-1px)}.btn-light{background:#fff;color:var(--navy)}.btn-ghost{background:rgba(255,255,255,.13);color:#fff;border:1px solid rgba(255,255,255,.28)}.content{padding:18px}.section-title{display:flex;align-items:center;justify-content:space-between;margin:14px 2px 9px}.section-title h2{font-size:13px;text-transform:uppercase;letter-spacing:.1em;color:#47606a;margin:0}.panel{background:#fff;border:1px solid var(--line);border-radius:18px;padding:16px;box-shadow:0 8px 24px rgba(7,59,76,.07);margin-bottom:13px}.hotel-name{font-size:17px;font-weight:900;color:var(--navy);margin-bottom:5px}.address{font-size:12.5px;color:var(--muted);line-height:1.5}.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:12px}.stat{border-radius:13px;background:#f4f8f8;padding:10px}.stat b{display:block;font-size:13px;color:var(--navy)}.stat span{font-size:11px;color:var(--muted)}.weather{display:flex;justify-content:space-between;align-items:center;background:linear-gradient(135deg,#edf9f7,#f3f8ff)}.weather-main{display:flex;gap:11px;align-items:center}.weather-icon{font-size:28px}.weather-temp{font-size:24px;font-weight:900;color:var(--navy)}.weather small{display:block;color:var(--muted);font-size:11px}.filters{display:grid;grid-template-columns:1fr 1fr;gap:8px}.filter{border:1px solid var(--line);background:#fff;border-radius:12px;padding:9px 10px;text-align:left;cursor:pointer;font-weight:750;font-size:12px;color:#40545d}.filter.active{border-color:var(--navy);box-shadow:inset 0 0 0 1px var(--navy);background:#eef6f6}.dot{width:9px;height:9px;border-radius:50%;display:inline-block;margin-right:6px}.place-list{display:grid;gap:9px}.place-card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:12px;display:grid;grid-template-columns:40px 1fr auto;gap:10px;align-items:start;cursor:pointer;transition:.2s}.place-card:hover{transform:translateY(-1px);box-shadow:0 8px 22px rgba(7,59,76,.1)}.place-icon{width:40px;height:40px;border-radius:13px;display:grid;place-items:center;font-size:20px;color:#fff}.place-card h3{font-size:13px;margin:1px 0 3px}.place-card p{font-size:11.5px;color:var(--muted);margin:0;line-height:1.45}.place-meta{font-size:10.5px;color:#4f646e;margin-top:5px;font-weight:700}.mini-btn{border:1px solid var(--line);background:#f7faf9;border-radius:10px;width:32px;height:32px;cursor:pointer}.itinerary{border-left:5px solid var(--teal)}.itinerary h3{font-size:14px;margin:0 0 5px;color:var(--navy)}.itinerary p{font-size:11.5px;color:var(--muted);margin:0 0 9px;line-height:1.45}.route-seq{display:flex;gap:5px;align-items:center;flex-wrap:wrap;font-size:10.5px;font-weight:800}.route-seq span{padding:5px 8px;border-radius:999px;background:#edf4f5}.route-stats{display:flex;gap:10px;margin-top:10px;font-size:11px;color:#41545d;font-weight:750}.route-btn{width:100%;margin-top:10px;justify-content:center;background:var(--navy);color:#fff}.notes{font-size:11.5px;color:var(--muted);line-height:1.55}.notes strong{color:var(--ink)}.live-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.live-link{display:flex;align-items:center;gap:9px;padding:11px;border:1px solid var(--line);border-radius:13px;background:#fff;text-decoration:none;color:var(--ink);font-size:12px;font-weight:800}.live-link:hover{border-color:var(--navy);background:#eef6f6}.live-link span{font-size:19px}.live-link small{display:block;font-size:9.5px;color:var(--muted);font-weight:600;margin-top:2px}.google-note{padding:10px 11px;border-radius:12px;background:#eef6f6;font-size:10.5px;color:#526770;line-height:1.45;margin-top:9px}.food-toolbar{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0}.food-toolbar select{width:100%;border:1px solid var(--line);border-radius:11px;padding:9px;background:#fff;color:var(--ink);font-weight:700;font-size:12px}.badge-row{display:flex;gap:5px;flex-wrap:wrap;margin-top:6px}.pill{font-size:9px;font-weight:850;padding:4px 7px;border-radius:999px;background:#eef4f5;color:#47606a}.pill.live{background:#eaf7ef;color:#18794e}.radius-note{background:#fff8e6;border:1px solid #efd59a;color:#735414;border-radius:13px;padding:11px;font-size:10.5px;line-height:1.5;margin-top:10px}.directory-count{font-weight:900;color:var(--navy)}.notes strong{color:var(--ink)}.map-shell{position:relative;height:100%}.map{height:100%;width:100%;background:#cfe8ea}.topbar{position:absolute;top:18px;left:18px;right:18px;z-index:700;display:flex;justify-content:space-between;pointer-events:none}.map-title,.map-tools{pointer-events:auto;background:rgba(255,255,255,.94);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.8);box-shadow:var(--shadow);border-radius:16px}.map-title{padding:12px 15px}.map-title b{display:block;color:var(--navy);font-size:15px}.map-title span{font-size:11px;color:var(--muted)}.map-tools{display:flex;padding:6px;gap:5px}.tool{border:0;background:transparent;border-radius:10px;padding:8px 10px;font-weight:800;font-size:11px;cursor:pointer}.tool:hover{background:#edf4f5}.legend{position:absolute;right:18px;bottom:26px;z-index:700;background:rgba(255,255,255,.95);backdrop-filter:blur(10px);border-radius:16px;padding:12px 14px;box-shadow:var(--shadow);font-size:11px;min-width:190px}.legend b{font-size:12px;color:var(--navy)}.legend-row{display:flex;align-items:center;gap:8px;margin-top:7px}.north{position:absolute;right:24px;top:94px;z-index:700;width:46px;height:65px;background:rgba(255,255,255,.94);border-radius:15px;box-shadow:var(--shadow);display:grid;place-items:center;font-weight:900;color:var(--navy)}.north:before{content:"▲";display:block;font-size:23px;line-height:20px}.north small{display:block;text-align:center;font-size:10px}.custom-pin{position:relative;width:38px;height:48px;filter:drop-shadow(0 6px 5px rgba(0,0,0,.22))}.pin-shape{width:38px;height:38px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);border:3px solid #fff;display:grid;place-items:center}.pin-shape span{transform:rotate(45deg);font-size:17px}.hotel-pin{width:52px;height:64px}.hotel-pin .pin-shape{width:52px;height:52px}.hotel-pin .pin-shape span{font-size:23px}.leaflet-popup-content-wrapper{border-radius:18px;box-shadow:0 12px 30px rgba(7,59,76,.22)}.leaflet-popup-content{margin:14px;width:260px!important}.popup h3{margin:0 0 5px;font-size:15px;color:var(--navy)}.popup .tag{display:inline-block;color:#fff;font-size:9px;font-weight:900;text-transform:uppercase;letter-spacing:.08em;border-radius:999px;padding:4px 7px;margin-bottom:7px}.popup p{font-size:11.5px;line-height:1.45;color:var(--muted);margin:5px 0}.popup-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:9px 0}.popup-grid div{background:#f2f6f6;padding:7px;border-radius:9px;font-size:10px}.popup-grid b{display:block;font-size:11px;color:var(--ink)}.popup-actions{display:flex;gap:6px}.popup-actions a,.popup-actions button{flex:1;text-align:center;text-decoration:none;border:0;border-radius:9px;padding:8px;background:var(--navy);color:#fff;font-size:10.5px;font-weight:850;cursor:pointer}.popup-actions button{background:#e8f0f1;color:var(--navy)}.modal{position:fixed;inset:0;background:rgba(2,27,36,.68);z-index:2000;display:none;place-items:center;padding:18px}.modal.open{display:grid}.modal-card{max-width:520px;width:100%;background:#fff;border-radius:22px;padding:22px;box-shadow:0 30px 80px rgba(0,0,0,.32)}.modal-head{display:flex;justify-content:space-between;gap:12px}.modal h2{margin:0;color:var(--navy);font-size:20px}.close{border:0;background:#edf2f2;border-radius:50%;width:34px;height:34px;cursor:pointer}.qr-wrap{display:grid;grid-template-columns:170px 1fr;gap:18px;align-items:center;margin-top:18px}.qr{padding:8px;background:#fff;border:1px solid var(--line);border-radius:12px;width:max-content}.modal p{font-size:12.5px;color:var(--muted);line-height:1.5}.data-note{font-size:10px;color:#78909a;margin-top:12px}.mobile-toggle{display:none}
+.quick-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.quick-card{border:1px solid var(--line);border-radius:14px;padding:12px;background:#fff;text-decoration:none;color:var(--ink);display:block}.quick-card:hover{border-color:var(--navy);background:#f2f8f8}.quick-card b{display:block;font-size:12px;color:var(--navy);margin-bottom:3px}.quick-card small{font-size:10px;color:var(--muted);line-height:1.4}.top-picks{display:grid;grid-template-columns:1fr 1fr;gap:9px}.top-pick{border:1px solid var(--line);border-radius:14px;padding:11px;background:#fff}.top-pick .pick-label{font-size:9px;text-transform:uppercase;letter-spacing:.08em;font-weight:900;color:var(--teal)}.top-pick b{display:block;font-size:12.5px;color:var(--navy);margin:3px 0}.top-pick small{display:block;font-size:10px;color:var(--muted);line-height:1.4}.top-pick-actions{display:flex;gap:5px;margin-top:8px}.top-pick-actions a,.top-pick-actions button{flex:1;border:1px solid var(--line);background:#f7faf9;border-radius:9px;padding:7px 5px;text-align:center;text-decoration:none;color:var(--navy);font-size:9px;font-weight:850;cursor:pointer}.checklist{display:grid;gap:7px}.check-row{display:flex;gap:9px;align-items:flex-start;font-size:11px;color:#435963;line-height:1.45}.check-row input{margin-top:2px}.safety-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.safety-item{background:#f5f9f9;border-radius:12px;padding:10px;font-size:10.5px;color:#526770;line-height:1.45}.share-btn{border:1px solid var(--line);background:#f7faf9;border-radius:10px;padding:7px 8px;cursor:pointer;font-weight:800;font-size:10px;color:var(--navy)}.fav-on{background:#fff1b8!important;border-color:#e4bb38!important}.planning-table{width:100%;border-collapse:collapse;font-size:10.5px}.planning-table th,.planning-table td{padding:8px 6px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}.planning-table th{color:var(--navy);font-size:9px;text-transform:uppercase;letter-spacing:.06em}.planning-table td:first-child{font-weight:800;color:#40545d}.live-status{display:inline-block;background:#eaf7ef;color:#18794e;border-radius:999px;padding:3px 6px;font-size:8.5px;font-weight:850}
+.food-group{margin:14px 0 18px}.food-group-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:4px 2px 9px;padding-bottom:7px;border-bottom:2px solid #e6eeee}.food-group-head h3{margin:0;font-size:13px;color:var(--navy);text-transform:uppercase;letter-spacing:.08em}.food-group-head span{font-size:10px;color:var(--muted);font-weight:800}.food-group.seafood .food-group-head{border-bottom-color:#0e7490}.food-group.seafood .food-group-head h3{color:#0e7490}.food-group.cafe .food-group-head{border-bottom-color:#7c3aed}.food-group.local .food-group-head{border-bottom-color:#b45309}.food-group.resort .food-group-head{border-bottom-color:#d69e2e}.food-group.thai .food-group-head{border-bottom-color:#dc2626}.food-group.quick .food-group-head{border-bottom-color:#475569}.food-group-grid{display:grid;gap:9px}.food-toolbar{display:none;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0}.food-toolbar select{width:100%;border:1px solid var(--line);border-radius:11px;padding:9px;background:#fff;color:var(--ink);font-weight:700;font-size:12px}.directory-count{font-size:10.5px;color:var(--muted);font-weight:800;margin:7px 2px 12px}
+@media(max-width:900px){.app{display:block;overflow:auto;height:auto}.sidebar{height:auto;overflow:visible}.map-shell{height:72vh;min-height:520px}.topbar{top:12px;left:12px;right:12px}.legend{right:12px;bottom:12px}.north{right:15px;top:84px}.mobile-toggle{display:inline-flex}.hero h1{font-size:30px}.filters{grid-template-columns:1fr 1fr 1fr}.content{padding-bottom:28px}}
+@media(max-width:560px){.hero{padding:23px 18px}.content{padding:13px}.filters{grid-template-columns:1fr 1fr}.map-title{max-width:220px}.map-tools .hide-mobile{display:none}.legend{min-width:0;font-size:10px;padding:10px}.legend-row{margin-top:5px}.qr-wrap{grid-template-columns:1fr}.place-card{grid-template-columns:38px 1fr auto}.map-shell{height:70vh;min-height:500px}}
+@media print{@page{size:A4 landscape;margin:8mm}body{background:#fff}.app{display:grid;grid-template-columns:34% 66%;height:190mm;overflow:hidden}.sidebar{height:190mm;overflow:hidden}.hero{padding:13px 16px}.hero h1{font-size:23px;margin:5px 0}.hero p{font-size:9px}.hero-actions,.filters,.place-list,.section-title.attractions,.map-tools,.modal{display:none!important}.content{padding:8px}.panel{padding:9px;margin-bottom:7px;box-shadow:none}.panel p,.notes{font-size:8px}.section-title{margin:5px 0}.section-title h2{font-size:9px}.itinerary h3{font-size:10px}.itinerary p,.route-stats,.route-seq{font-size:7.5px}.route-btn{display:none}.map-shell,.map{height:190mm}.topbar{top:8px;left:8px}.map-title{padding:8px}.legend{bottom:8px;right:8px}.leaflet-control-container{display:none}.weather{display:none}}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="sidebar">
+  <header class="hero">
+    <div class="eyebrow">Staff Retreat Travel Guide · Kuantan, Pahang</div>
+    <h1>Explore <span>Kuantan</span></h1>
+    <p>Staff Retreat Travel, Prayer & Attraction Guide<br><em>Panduan Perjalanan, Solat & Tarikan</em></p>
+    <div class="hero-actions">
+      <button class="btn btn-light" onclick="focusHotel()">⌖ View Resort</button>
+      <button class="btn btn-ghost" onclick="window.print()">⎙ Print A4</button>
+    </div>
+  </header>
+  <div class="content">
+    <div class="section-title"><h2>Base Location</h2></div>
+    <section class="panel">
+      <div class="hotel-name">Swiss-Grand Beach Resort Kuantan</div>
+      <div class="address">2656–2657, Mukim Sungai Karang, Balok Beach, Beserah, 26100 Kuantan, Pahang, Malaysia.</div>
+      <div class="stat-grid">
+        <div class="stat"><b>🚗 Car / Van</b><span>Recommended transport</span></div>
+        <div class="stat"><b>📱 E-hailing</b><span>Suitable for small groups</span></div>
+        <div class="stat"><b>☎ Emergency</b><span>[Insert contact]</span></div>
+        <div class="stat"><b>👤 Coordinator</b><span>[Insert contact]</span></div>
+      </div>
+    </section>
+    <section class="panel weather">
+      <div class="weather-main"><div class="weather-icon" id="weatherIcon">🌤️</div><div><div class="weather-temp" id="weatherTemp">--°C</div><small id="weatherText">Loading Kuantan weather…</small></div></div>
+      <div style="text-align:right"><b style="font-size:11px;color:var(--navy)">Weather Advisory</b><small id="weatherWind">Check before departure</small></div>
+    </section>
+    <div class="section-title"><h2>Live Google Maps Nearby</h2></div>
+    <section class="panel">
+      <div class="live-grid">
+        <a class="live-link" target="_blank" rel="noopener" href="https://www.google.com/maps/search/mosque/@3.910865,103.3653233,14z"><span>🕌</span><div>Mosques nearby<small>Live results, ratings & opening status</small></div></a>
+        <a class="live-link" target="_blank" rel="noopener" href="https://www.google.com/maps/search/halal+food/@3.910865,103.3653233,14z"><span>🍛</span><div>Halal food<small>Current nearby food options</small></div></a>
+        <a class="live-link" target="_blank" rel="noopener" href="https://www.google.com/maps/search/restaurants/@3.910865,103.3653233,14z"><span>🍽️</span><div>Restaurants<small>Sort by distance, rating or open now</small></div></a>
+        <a class="live-link" target="_blank" rel="noopener" href="https://www.google.com/maps/search/seafood/@3.910865,103.3653233,14z"><span>🦐</span><div>Seafood<small>Beserah and Balok coastal dining</small></div></a>
+        <a class="live-link" target="_blank" rel="noopener" href="https://www.google.com/maps/search/breakfast/@3.910865,103.3653233,14z"><span>☕</span><div>Breakfast<small>Morning food and local cafés</small></div></a>
+        <a class="live-link" target="_blank" rel="noopener" href="https://www.google.com/maps/search/cafe/@3.910865,103.3653233,14z"><span>🥤</span><div>Cafés<small>Coffee, desserts and casual stops</small></div></a>
+        <a class="live-link" target="_blank" rel="noopener" href="https://www.google.com/maps/search/keropok+lekor/@3.910865,103.3653233,14z"><span>🐟</span><div>Keropok lekor<small>Local fish-cracker stalls and shops</small></div></a>
+        <a class="live-link" target="_blank" rel="noopener" href="https://www.google.com/maps/search/petrol+station/@3.910865,103.3653233,14z"><span>⛽</span><div>Petrol stations<small>Fuel, toilets and convenience stops</small></div></a>
+        <a class="live-link" target="_blank" rel="noopener" href="https://www.google.com/maps/search/nasi+lemak/@3.910865,103.3653233,14z"><span>🍚</span><div>Nasi lemak<small>Local breakfast and supper</small></div></a>
+        <a class="live-link" target="_blank" rel="noopener" href="https://www.google.com/maps/search/tomyam/@3.910865,103.3653233,14z"><span>🍲</span><div>Tom yam & Thai<small>Popular family dining nearby</small></div></a>
+        <a class="live-link" target="_blank" rel="noopener" href="https://www.google.com/maps/search/char+kuey+teow/@3.910865,103.3653233,14z"><span>🍜</span><div>Char kuey teow<small>Local fried-noodle favourites</small></div></a>
+        <a class="live-link" target="_blank" rel="noopener" href="https://www.google.com/maps/search/dessert/@3.910865,103.3653233,14z"><span>🍰</span><div>Desserts<small>Ice cream, cakes and sweet stops</small></div></a>
+        <a class="live-link" target="_blank" rel="noopener" href="https://www.google.com/maps/search/open+now+restaurant/@3.910865,103.3653233,14z"><span>🕒</span><div>Open now<small>Current operating restaurants</small></div></a>
+        <a class="live-link" target="_blank" rel="noopener" href="https://www.google.com/maps/search/highly+rated+restaurant/@3.910865,103.3653233,14z"><span>⭐</span><div>Highly rated<small>Compare current Google reviews</small></div></a>
+      </div>
+      <div class="google-note"><strong>Google Maps live mode:</strong> these buttons open current results centred on the exact resort coordinate. Google Maps provides the latest route, traffic, operating hours, ratings and travel time.</div>
+    </section>
+    <div class="section-title attractions"><h2>Nearby Food, Cafés, Local Snacks & Essentials</h2><span style="font-size:10px;color:var(--muted)">Google Maps linked</span></div>
+    <section class="panel" style="padding:10px"><label for="placeSearch" style="font-size:11px;font-weight:800;color:var(--navy)">Search food, coffee or place</label><input id="placeSearch" type="search" placeholder="e.g. seafood, coffee, keropok lekor, petrol" style="width:100%;margin-top:7px;padding:10px 12px;border:1px solid var(--line);border-radius:11px;font:inherit" /><div class="food-toolbar" id="foodToolbar"><select id="foodType" aria-label="Food category"><option value="all">All food categories</option><option value="seafood">Seafood & ikan bakar</option><option value="local">Local & Malay food</option><option value="thai">Thai & tom yam</option><option value="cafe">Coffee & cafés</option><option value="breakfast">Breakfast</option><option value="resort">Resort dining</option><option value="quick">Quick meals</option><option value="snack">Keropok lekor & snacks</option><option value="essential">Petrol & essentials</option></select><select id="foodUse" aria-label="Dining occasion"><option value="all">All occasions</option><option value="group">Group dining</option><option value="quick">Quick stop</option><option value="evening">Evening</option></select></div><div class="directory-count" id="directoryCount"></div></section><div class="place-list" id="placeList"></div>
+    <div class="section-title"><h2>Top Picks for Staff</h2><span style="font-size:10px;color:var(--muted)">Simple shortlist</span></div>
+    <section class="panel"><div class="top-picks" id="topPicks"></div><div class="google-note"><strong>Selection basis:</strong> proximity, convenience and public travel listings. Always check current operating hours, dietary suitability and group availability before departure.</div></section>
+
+    <div class="section-title"><h2>Emergency, Medical & Daily Needs</h2></div>
+    <section class="panel">
+      <div class="quick-grid">
+        <a class="quick-card" target="_blank" rel="noopener" href="https://www.google.com/maps/search/clinic/@3.910865,103.3653233,14z"><b>🏥 Clinics nearby</b><small>Open Google Maps for the nearest operating clinic.</small></a>
+        <a class="quick-card" target="_blank" rel="noopener" href="https://www.google.com/maps/search/pharmacy/@3.910865,103.3653233,14z"><b>💊 Pharmacies</b><small>Check opening hours and call before travelling.</small></a>
+        <a class="quick-card" target="_blank" rel="noopener" href="https://www.google.com/maps/search/hospital/@3.910865,103.3653233,13z"><b>🚑 Hospitals</b><small>Use for urgent medical planning; call 999 for emergencies.</small></a>
+        <a class="quick-card" target="_blank" rel="noopener" href="https://www.google.com/maps/search/police+station/@3.910865,103.3653233,14z"><b>👮 Police stations</b><small>Nearest current station results and directions.</small></a>
+        <a class="quick-card" target="_blank" rel="noopener" href="https://www.google.com/maps/search/ATM/@3.910865,103.3653233,14z"><b>🏧 ATM & banking</b><small>Find nearby cash and banking facilities.</small></a>
+        <a class="quick-card" target="_blank" rel="noopener" href="https://www.google.com/maps/search/convenience+store/@3.910865,103.3653233,14z"><b>🛒 Convenience stores</b><small>Drinks, personal items and basic supplies.</small></a>
+        <a class="quick-card" target="_blank" rel="noopener" href="https://www.google.com/maps/search/laundry/@3.910865,103.3653233,14z"><b>🧺 Laundry</b><small>Nearby self-service and laundry shops.</small></a>
+        <a class="quick-card" target="_blank" rel="noopener" href="https://www.google.com/maps/search/tyre+shop/@3.910865,103.3653233,14z"><b>🛞 Tyre & workshop</b><small>Roadside support and basic vehicle services.</small></a>
+      </div>
+      <div class="radius-note"><strong>Emergency:</strong> Malaysia emergency number is <strong>999</strong>. Share the exact resort address and your live location. For non-emergency treatment, confirm that the selected clinic is open before travelling.</div>
+    </section>
+
+    <div class="section-title"><h2>Prayer, Group Dining & Accessibility</h2></div>
+    <section class="panel">
+      <table class="planning-table">
+        <tr><th>Planning item</th><th>Staff guidance</th></tr>
+        <tr><td>Friday prayer</td><td>Use the nearest mosque link, verify current Friday-prayer arrangements and leave 30–40 minutes early.</td></tr>
+        <tr><td>Large groups</td><td>Contact the restaurant before departure. Confirm seating, reservation, parking, set menu and payment arrangement.</td></tr>
+        <tr><td>Dietary needs</td><td>Do not assume certification from a map category. Confirm halal status, allergens and vegetarian requirements directly.</td></tr>
+        <tr><td>Accessibility</td><td>Confirm step-free access, accessible toilets, elderly-friendly walking distance and drop-off arrangements.</td></tr>
+        <tr><td>Weather</td><td>Avoid exposed beach areas during lightning, thunderstorms, rough seas or official weather warnings.</td></tr>
+      </table>
+      <div class="live-grid" style="margin-top:10px">
+        <a class="live-link" target="_blank" rel="noopener" href="https://www.google.com/maps/search/wheelchair+accessible+restaurant/@3.910865,103.3653233,14z"><span>♿</span><div>Accessible dining<small>Verify accessibility directly</small></div></a>
+        <a class="live-link" target="_blank" rel="noopener" href="https://www.google.com/maps/search/group+restaurant/@3.910865,103.3653233,14z"><span>👥</span><div>Group restaurants<small>Call ahead for seating</small></div></a>
+      </div>
+    </section>
+
+    <div class="section-title"><h2>Coordinator Checklist</h2></div>
+    <section class="panel"><div class="checklist">
+      <label class="check-row"><input type="checkbox"> Confirm programme release and return time.</label>
+      <label class="check-row"><input type="checkbox"> Confirm driver, van, meeting point and passenger list.</label>
+      <label class="check-row"><input type="checkbox"> Call restaurants for group seating and dietary requirements.</label>
+      <label class="check-row"><input type="checkbox"> Check weather, traffic and official prayer times.</label>
+      <label class="check-row"><input type="checkbox"> Share Google Maps/Waze links with staff.</label>
+      <label class="check-row"><input type="checkbox"> Remind staff to return before the next official session.</label>
+    </div></section>
+
+    <div class="section-title"><h2>Recommended Staff Routes</h2></div>
+    <div id="itineraries"></div>
+    <section class="panel notes">
+      <strong>Staff reminders</strong><br>
+      Check current traffic, weather and official prayer times before leaving. For Friday prayer, depart at least <strong>30–40 minutes early</strong>. Keep to programme timing, travel in groups where practical, secure valuables and avoid exposed coastal areas during thunderstorms or rough seas.
+      <div class="data-note">Distances and times shown are planning estimates and can change with route, traffic and weather. Use the live Google Maps button for current navigation.</div>
+    </section>
+    <p style="text-align:center;font-size:11px;color:#526b75;font-weight:700;margin:18px 8px 26px">“Plan your journey, respect programme timing and enjoy Kuantan responsibly.”</p>
+  </div>
+</aside>
+<main class="map-shell" id="mapSection">
+  <div id="map" class="map"></div>
+  <div class="topbar">
+    <div class="map-title"><b>Coastal Kuantan Orientation Map</b><span>Exact resort pin · Google Maps live nearby searches</span></div>
+    <div class="map-tools"><button class="tool" onclick="showAll()">Reset map</button></div>
+  </div>
+  <div class="north"><div>▲<small>NORTH</small></div></div>
+  <div class="legend"><b>Map Guide</b><div class="legend-row">🏨 Resort base</div><div class="legend-row">🕌 Nearest prayer location</div><div class="legend-row">🍽️ Food & cafés</div><div class="legend-row">🐟 Local snacks</div><div class="legend-row">⛽ Petrol & essentials</div></div>
+</main>
+</div>
+<div class="modal" id="qrModal" onclick="if(event.target===this) closeModal()"><div class="modal-card"><div class="modal-head"><div><div class="eyebrow" style="color:var(--teal)">Google Maps</div><h2 id="modalTitle">Location</h2></div><button class="close" onclick="closeModal()">✕</button></div><div class="qr-wrap"><div class="qr" id="qrCode"></div><div><p>Scan for Google Maps directions from the staff member’s current location, or choose Google Maps or Waze below.</p><div style="display:flex;gap:8px;flex-wrap:wrap"><button id="modalLink" class="btn" style="background:var(--navy);color:#fff">Google Maps ↗</button><button id="modalWaze" class="btn" style="background:#0e7490;color:#fff">Waze ↗</button></div></div></div></div></div>
+<script>
+const COLORS={hotel:'#d69e2e',mosque:'#198754',nature:'#1677c8',culture:'#e87922',city:'#7651b7',food:'#b45309'};
+const hotel={id:'hotel',name:'Swiss-Grand Beach Resort Kuantan',lat:3.910865,lng:103.3653233,icon:'🏨',category:'hotel',distance:'Starting point',time:'—',duration:'Retreat base',best:'Any time',desc:'Beachfront retreat base on Balok Beach. Resort marker fixed to the exact Google Maps coordinate supplied: 3.910865, 103.3653233.',maps:'https://www.google.com/maps/search/?api=1&query=3.910865%2C103.3653233'};
+const places=[
+{id:'gardenTerrace',name:'Garden Terrace — Swiss-Grand',lat:3.910865,lng:103.3653233,icon:'🍽️',category:'food',type:'resort',use:'group',distance:'On-site',time:'Walk within resort',duration:'45–90 min',best:'Breakfast, lunch or dinner',desc:'All-day resort dining; convenient for programme meals and larger staff groups.',recommend:'Most convenient group option',verified:'Hotel & Google listing',maps:'https://www.google.com/maps/search/?api=1&query=Garden+Terrace+Swiss-Grand+Beach+Resort+Kuantan'},
+{id:'blossom',name:'The Blossom — Swiss-Grand',lat:3.910865,lng:103.3653233,icon:'🥢',category:'food',type:'resort',use:'group',distance:'On-site',time:'Walk within resort',duration:'60–90 min',best:'Lunch or dinner',desc:'Chinese restaurant inside the resort, suitable for organised group dining subject to reservation.',recommend:'Chinese dining',verified:'Hotel & Google listing',maps:'https://www.google.com/maps/search/?api=1&query=The+Blossom+Swiss-Grand+Beach+Resort+Kuantan'},
+{id:'swissDeli',name:'Swiss-Deli — Swiss-Grand',lat:3.910865,lng:103.3653233,icon:'☕',category:'food',type:'cafe',use:'quick',distance:'On-site',time:'Walk within resort',duration:'20–45 min',best:'Coffee, snacks or quick break',desc:'Resort deli for drinks, pastries and a convenient informal staff break.',recommend:'Fastest coffee option',verified:'Hotel & Google listing',maps:'https://www.google.com/maps/search/?api=1&query=Swiss-Deli+Swiss-Garden+Kuantan'},
+{id:'sands',name:'Sands Beach Café @ ADENA',icon:'☕',category:'food',type:'cafe',use:'evening',distance:'Nearby coastal zone',time:'Check live Google route',duration:'30–60 min',best:'Coffee, breakfast or sunset meal',desc:'Beach-area café near Pantai Balok, repeatedly listed among the closest dining options to the resort.',recommend:'Beach atmosphere',verified:'Tripadvisor nearby listing',maps:'https://www.google.com/maps/dir/?api=1&origin=3.910865%2C103.3653233&destination=Sands+Beach+Cafe+ADENA+Kuantan&travelmode=driving'},
+{id:'portKawan',name:'Port Kawan Cafe — Eat. Drink. Chillax',icon:'🥤',category:'food',type:'cafe',use:'evening',distance:'Nearby coastal zone',time:'Check live Google route',duration:'45–90 min',best:'Casual lunch or evening',desc:'Casual Malaysian café listed among the closest eateries around Swiss-Grand and Pantai Balok.',recommend:'Relaxed casual meal',verified:'Tripadvisor nearby listing',maps:'https://www.google.com/maps/dir/?api=1&origin=3.910865%2C103.3653233&destination=Port+Kawan+Cafe+Kuantan&travelmode=driving'},
+{id:'saraThai',name:'Sara Thai Kitchen Balok',icon:'🍲',category:'food',type:'thai',use:'group',distance:'Approx. nearby Balok corridor',time:'Check live Google route',duration:'60–90 min',best:'Lunch or dinner',desc:'Established Thai restaurant commonly surfaced near Pantai Balok and the resort corridor.',recommend:'Thai family-style dishes',verified:'Tripadvisor nearby listing',maps:'https://www.google.com/maps/dir/?api=1&origin=3.910865%2C103.3653233&destination=Sara+Thai+Kitchen+Balok&travelmode=driving'},
+{id:'siamBalok',name:'Restoran The Siam Balok',icon:'🍲',category:'food',type:'thai',use:'group',distance:'Balok area',time:'Check live Google route',duration:'45–90 min',best:'Lunch or dinner',desc:'Family-style Thai and local dining option around Balok.',recommend:'Tom yam and shared dishes',verified:'Google Maps live listing',maps:'https://www.google.com/maps/dir/?api=1&origin=3.910865%2C103.3653233&destination=Restoran+The+Siam+Balok&travelmode=driving'},
+{id:'planetSeafood',name:'Planet Seafood',icon:'🦐',category:'food',type:'seafood',use:'group',distance:'Chengal Lempong / Balok zone',time:'Check live Google route',duration:'60–90 min',best:'Dinner',desc:'Known seafood dining point in the Chengal Lempong–Balok area.',recommend:'Shared seafood dinner',verified:'Local listings & Google Maps',maps:'https://www.google.com/maps/dir/?api=1&origin=3.910865%2C103.3653233&destination=Planet+Seafood+Balok+Kuantan&travelmode=driving'},
+{id:'seaba',name:'Seaba Seafood',icon:'🦀',category:'food',type:'seafood',use:'group',distance:'Pantai Batu Hitam zone',time:'Check live Google route',duration:'60–90 min',best:'Dinner',desc:'Popular seafood restaurant at the Batu Hitam coastal area, noted for fish, prawns and crab.',recommend:'Coastal seafood',verified:'Published address & travel listing',maps:'https://www.google.com/maps/dir/?api=1&origin=3.910865%2C103.3653233&destination=SEABA+Seafood+Kuantan&travelmode=driving'},
+{id:'beserahSeafood',name:'Beserah Seafood Restaurant',icon:'🐟',category:'food',type:'seafood',use:'group',distance:'Kampung Batu Hitam zone',time:'Check live Google route',duration:'60–90 min',best:'Dinner',desc:'Seafood restaurant publicly listed in Kampung Batu Hitam.',recommend:'Local seafood option',verified:'Waze public listing',maps:'https://www.google.com/maps/dir/?api=1&origin=3.910865%2C103.3653233&destination=Beserah+Seafood+Restaurant+Kuantan&travelmode=driving'},
+{id:'pakSu',name:'Pak Su Seafood Restaurant',icon:'🦐',category:'food',type:'seafood',use:'group',distance:'Pantai Balok zone',time:'Check live Google route',duration:'60–90 min',best:'Lunch or dinner',desc:'Frequently recommended seafood restaurant around Pantai Balok.',recommend:'Group seafood meal',verified:'Travel-directory listing',maps:'https://www.google.com/maps/dir/?api=1&origin=3.910865%2C103.3653233&destination=Pak+Su+Seafood+Restaurant+Kuantan&travelmode=driving'},
+{id:'7am',name:'7AM Spresso Cafe',icon:'☕',category:'food',type:'cafe',use:'quick',distance:'Balok area',time:'Check live Google route',duration:'30–60 min',best:'Breakfast and coffee',desc:'Early coffee and breakfast option in the Balok area.',recommend:'Morning coffee',verified:'Google Maps live listing',maps:'https://www.google.com/maps/dir/?api=1&origin=3.910865%2C103.3653233&destination=7AM+Spresso+Cafe+Balok&travelmode=driving'},
+{id:'zusTimur',name:'ZUS Coffee — Timur Bay',icon:'🥤',category:'food',type:'cafe',use:'quick',distance:'Timur Bay area',time:'Check live Google route',duration:'20–45 min',best:'Coffee and quick break',desc:'Recognisable coffee chain near the Batu Hitam–Timur Bay accommodation corridor.',recommend:'Reliable takeaway coffee',verified:'Google Maps live listing',maps:'https://www.google.com/maps/dir/?api=1&origin=3.910865%2C103.3653233&destination=ZUS+Coffee+Timur+Bay+Kuantan&travelmode=driving'},
+{id:'tradisea',name:"Tradi'sea Cafe Balok",icon:'☕',category:'food',type:'cafe',use:'quick',distance:'Chengal Lempong / Balok zone',time:'Check live Google route',duration:'30–60 min',best:'Afternoon or evening',desc:'Local café publicly promoted opposite the Planet Seafood area.',recommend:'Local café stop',verified:'Current local business posts',maps:'https://www.google.com/maps/dir/?api=1&origin=3.910865%2C103.3653233&destination=Tradi%27sea+Cafe+Balok&travelmode=driving'},
+{id:'warongTeratai',name:'Warong Teratai Balok',icon:'🍳',category:'food',type:'breakfast',use:'quick',distance:'Balok area',time:'Check live Google route',duration:'30–60 min',best:'Breakfast',desc:'Local breakfast option in Balok.',recommend:'Simple local breakfast',verified:'Google Maps live listing',maps:'https://www.google.com/maps/dir/?api=1&origin=3.910865%2C103.3653233&destination=Warong+Teratai+Balok&travelmode=driving'},
+{id:'alSharifah',name:'Restoran Al Sharifah Balok',icon:'🍛',category:'food',type:'local',use:'quick',distance:'Balok Perdana',time:'Check live Google route',duration:'30–60 min',best:'Any time / late meal',desc:'Nasi kandar, briyani and mamak-style dishes; public listing indicates extended hours.',recommend:'Late or flexible meal',verified:'Waze public listing',maps:'https://www.google.com/maps/dir/?api=1&origin=3.910865%2C103.3653233&destination=Restoran+Al+Sharifah+Balok&travelmode=driving'},
+{id:'kampungKitchen',name:'Kampung Kitchen Balok',icon:'🍛',category:'food',type:'local',use:'group',distance:'Balok area',time:'Check live Google route',duration:'45–75 min',best:'Lunch or dinner',desc:'Family restaurant option around Balok.',recommend:'Malay family dining',verified:'Google Maps live listing',maps:'https://www.google.com/maps/dir/?api=1&origin=3.910865%2C103.3653233&destination=Kampung+Kitchen+Balok+Kuantan&travelmode=driving'},
+{id:'ayamGepuk',name:'Ayam Gepuk Pak Pi Balok Sentral',icon:'🍗',category:'food',type:'quick',use:'quick',distance:'Balok Sentral',time:'Check live Google route',duration:'30–60 min',best:'Lunch or dinner',desc:'Value-focused Indonesian-style spicy chicken meal.',recommend:'Affordable quick meal',verified:'Google Maps live listing',maps:'https://www.google.com/maps/dir/?api=1&origin=3.910865%2C103.3653233&destination=Ayam+Gepuk+Pak+Pi+Balok+Sentral&travelmode=driving'},
+{id:'crispBite',name:'CrispBite Hot Chicken Balok',icon:'🍗',category:'food',type:'quick',use:'quick',distance:'Balok area',time:'Check live Google route',duration:'20–45 min',best:'Quick meal or takeaway',desc:'Hot-chicken takeaway option in Balok.',recommend:'Fast takeaway',verified:'Google Maps live listing',maps:'https://www.google.com/maps/dir/?api=1&origin=3.910865%2C103.3653233&destination=CrispBite+Hot+Chicken+Balok&travelmode=driving'},
+{id:'sedapTekok',name:'Sedap Tekok by A&H Recipe',icon:'🍽️',category:'food',type:'local',use:'group',distance:'Wider Balok area',time:'Check live Google route',duration:'45–75 min',best:'Lunch or dinner',desc:'Local family-dining option around Balok.',recommend:'Family dining',verified:'Google Maps live listing',maps:'https://www.google.com/maps/dir/?api=1&origin=3.910865%2C103.3653233&destination=Sedap+Tekok+By+A%26H+Recipe+Balok&travelmode=driving'},
+{id:'charKueyTeow',name:'Char Kuey Teow Berapi Kuantan',icon:'🍜',category:'food',type:'local',use:'evening',distance:'Verify live radius',time:'Check live Google route',duration:'30–60 min',best:'Evening',desc:'Popular-style local char kuey teow option; confirm the selected branch remains within the 10 km boundary.',recommend:'Evening local food',verified:'Google Maps live verification required',maps:'https://www.google.com/maps/dir/?api=1&origin=3.910865%2C103.3653233&destination=Char+Kuey+Teow+Berapi+Kuantan&travelmode=driving'},
+{id:'pattani',name:'Restaurant Pattani Family',icon:'🍽️',category:'food',type:'thai',use:'group',distance:'Near resort corridor',time:'Check live Google route',duration:'45–75 min',best:'Lunch or dinner',desc:'Family restaurant surfaced among places near Swiss-Grand.',recommend:'Shared family meal',verified:'Google Maps live listing',maps:'https://www.google.com/maps/dir/?api=1&origin=3.910865%2C103.3653233&destination=Restaurant+Pattani+Family+Kuantan&travelmode=driving'},
+{id:'ohFatimah',name:'Keropok Lekor Oh Fatimah',icon:'🐟',category:'food',type:'snack',use:'quick',distance:'Beserah / Tanjung corridor',time:'Check live route',duration:'15–30 min',best:'Tea-time snack or takeaway',desc:'Tripadvisor-listed Beserah stop known for keropok lekor and local snacks.',recommend:'Keropok lekor takeaway',verified:'Tripadvisor listing and Waze place record',maps:'https://www.google.com/maps/search/?api=1&query=Keropok+Lekor+Oh+Fatimah+Kuantan'},
+{id:'kakcik2',name:'Keropok Lekor Kakcik 2',icon:'🐟',category:'food',type:'snack',use:'quick',distance:'Seberang Balok corridor',time:'Check live route',duration:'15–30 min',best:'Afternoon snack or takeaway',desc:'Keropok lekor shop on Jalan Kuantan–Kemaman in Kampung Seberang Balok.',recommend:'Quick local snack stop',verified:'Waze place record',maps:'https://www.google.com/maps/search/?api=1&query=Keropok+Lekor+Kakcik+2+Balok'},
+{id:'bhpetrolBalok',name:'BHPetrol Balok',icon:'⛽',category:'food',type:'essential',use:'quick',distance:'Balok area',time:'Check live route',duration:'10–15 min',best:'Before longer staff journeys',desc:'Officially listed BHPetrol station in Balok for fuel and basic travel needs.',recommend:'Fuel and convenience stop',verified:'BHPetrol official station listing',maps:'https://www.google.com/maps/search/?api=1&query=BHPetrol+Balok'},
+{id:'petronasBalok',name:'PETRONAS Balok / Sungai Karang',icon:'⛽',category:'food',type:'essential',use:'quick',distance:'Balok–Sungai Karang corridor',time:'Check live route',duration:'10–15 min',best:'Fuel, restroom and convenience stop',desc:'Use the live map result to select the nearest operating PETRONAS station from the resort.',recommend:'Check current opening status',verified:'Google Maps live search',maps:'https://www.google.com/maps/search/?api=1&query=PETRONAS+Balok+Kuantan'},
+{id:'mosque',name:'Masjid Jamek Kampung Sungai Karang Darat',lat:3.92095,lng:103.36075,icon:'🕌',category:'mosque',distance:'≈ 1.2 km',time:'≈ 4–6 min',duration:'Prayer visit',best:'Depart 30–40 min before Friday prayer',desc:'Nearest identified congregational mosque. Parking information is mixed; allow extra time and expect possible roadside parking.',label:'Nearest Prayer Location',maps:'https://www.google.com/maps/dir/?api=1&origin=3.910865%2C103.3653233&destination=Masjid+Jamek+Kampung+Sungai+Karang+Darat&travelmode=driving'},
+{id:'balok',name:'Pantai Balok',lat:3.9348,lng:103.3769,icon:'🏖️',category:'nature',distance:'≈ 4–5 km',time:'≈ 6–8 min',duration:'30–60 min',best:'Sunrise or late afternoon',desc:'A breezy, relaxed coastal stop suited to a short staff break.',maps:'https://www.google.com/maps/dir/?api=1&origin=3.910865%2C103.3653233&destination=Pantai+Balok&travelmode=driving'},
+{id:'batik',name:'Natural Batik Village',lat:3.9387,lng:103.3741,icon:'🎨',category:'culture',distance:'≈ 2 km',time:'≈ 3–5 min',duration:'45–75 min',best:'10:00 AM–5:30 PM',desc:'See Malaysian batik craft, browse local products and try a hands-on cultural activity.',maps:'https://www.google.com/maps/dir/?api=1&origin=3.910865%2C103.3653233&destination=Natural+Batik+Village+Kuantan&travelmode=driving'},
+{id:'batuhitam',name:'Pantai Batu Hitam',lat:3.9047,lng:103.3726,icon:'🌊',category:'nature',distance:'≈ 3–4 km',time:'≈ 5–7 min',duration:'45–60 min',best:'Late afternoon',desc:'Distinctive dark stones, open sea views and an easy coastal photo stop.',maps:'https://www.google.com/maps/dir/?api=1&origin=3.910865%2C103.3653233&destination=Pantai+Batu+Hitam+Kuantan&travelmode=driving'},
+{id:'gelora',name:'Taman Gelora',lat:3.8129,lng:103.3507,icon:'🌳',category:'nature',distance:'≈ 15–17 km',time:'≈ 18–24 min',duration:'45–75 min',best:'Morning or 5:00–7:00 PM',desc:'A scenic lakeside and coastal park for walking, light exercise and group relaxation.',maps:'https://www.google.com/maps/dir/?api=1&origin=3.910865%2C103.3653233&destination=Taman+Gelora+Kuantan&travelmode=driving'},
+{id:'teluk',name:'Teluk Cempedak',lat:3.8120,lng:103.3729,icon:'🌅',category:'nature',distance:'≈ 17–19 km',time:'≈ 18–25 min',duration:'60–90 min',best:'Late afternoon or evening',desc:'Kuantan’s popular beachfront promenade with cafés, sea views and a lively evening atmosphere.',maps:'https://www.google.com/maps/dir/?api=1&origin=3.910865%2C103.3653233&destination=Teluk+Cempedak&travelmode=driving'},
+{id:'stateMosque',name:'Sultan Ahmad 1 State Mosque',lat:3.8078,lng:103.3258,icon:'🕌',category:'culture',distance:'≈ 18–20 km',time:'≈ 22–28 min',duration:'30–45 min',best:'Outside prayer peak periods',desc:'A prominent Kuantan religious and architectural landmark in the city centre.',maps:'https://www.google.com/maps/dir/?api=1&origin=3.910865%2C103.3653233&destination=Sultan+Ahmad+1+State+Mosque+Kuantan&travelmode=driving'},
+{id:'tower',name:'Kuantan 188',lat:3.8069,lng:103.3267,icon:'🗼',category:'city',distance:'≈ 19–21 km',time:'≈ 22–30 min',duration:'45–75 min',best:'Sunset to evening',desc:'City observation tower and a strong evening landmark for panoramic views.',maps:'https://www.google.com/maps/dir/?api=1&origin=3.910865%2C103.3653233&destination=Kuantan+188&travelmode=driving'},
+{id:'esplanade',name:'Kuantan River Esplanade',lat:3.8039,lng:103.3260,icon:'🚶',category:'city',distance:'≈ 19–21 km',time:'≈ 22–30 min',duration:'30–60 min',best:'After 5:30 PM',desc:'An easy riverside walk near the city centre, suitable for unwinding after the programme.',maps:'https://www.google.com/maps/dir/?api=1&origin=3.910865%2C103.3653233&destination=Kuantan+River+Esplanade&travelmode=driving'}
+];
+const itineraries=[
+{name:'Quick Break · 1–2 Hours',desc:'A low-travel option for fresh air and a short cultural stop.',stops:['hotel','batik','batuhitam','hotel'],distance:'≈ 16 km loop',time:'≈ 25 min driving',color:'#1677c8'},
+{name:'Half-Day Kuantan Experience · 4–5 Hours',desc:'Nature, local craft and a relaxed city/coastal finish.',stops:['hotel','batik','gelora','teluk','hotel'],distance:'≈ 42 km loop',time:'≈ 70–85 min driving',color:'#e87922'},
+{name:'Evening Route · After Programme',desc:'Panoramic city views, riverside atmosphere and beachfront dining/relaxation.',stops:['hotel','tower','esplanade','teluk','hotel'],distance:'≈ 48 km loop',time:'≈ 75–90 min driving',color:'#7651b7'}
+];
+const all=[hotel,...places];
+const topPickConfig=[
+  {label:'Closest meal',id:'gardenTerrace',note:'On-site and practical for programme timing.'},
+  {label:'Coffee & sunset',id:'sands',note:'A nearby coastal café option; check live hours.'},
+  {label:'Casual café',id:'portKawan',note:'Relaxed stop close to the resort corridor.'},
+  {label:'Thai group meal',id:'saraThai',note:'Publicly listed among the closest restaurants.'},
+  {label:'Seafood dinner',id:'pakSu',note:'Known coastal seafood option; call before group arrival.'},
+  {label:'Local snack',id:'ohFatimah',note:'Keropok lekor and takeaway local snacks.'},
+  {label:'Closest mosque',id:'mosque',note:'Verify prayer arrangements and depart early.'},
+  {label:'Fuel stop',id:'bhpetrolBalok',note:'Official BHPetrol listing with convenience facilities.'}
+];
+function destinationValue(p){return Number.isFinite(p.lat)&&Number.isFinite(p.lng)?`${p.lat},${p.lng}`:p.name+' Kuantan';}
+function googleNav(p){return `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(destinationValue(p))}&travelmode=driving`;}
+function googleFromResort(p){return `https://www.google.com/maps/dir/?api=1&origin=${hotel.lat},${hotel.lng}&destination=${encodeURIComponent(destinationValue(p))}&travelmode=driving`;}
+function wazeNav(p){return Number.isFinite(p.lat)&&Number.isFinite(p.lng)?`https://www.waze.com/ul?ll=${p.lat}%2C${p.lng}&navigate=yes&utm_source=staff_guide`:`https://www.waze.com/ul?q=${encodeURIComponent(p.name+' Kuantan')}&navigate=yes&utm_source=staff_guide`;}
+function mobilePlatform(){const ua=navigator.userAgent||'';return /iPad|iPhone|iPod/.test(ua)?'ios':(/Android/i.test(ua)?'android':'other');}
+function appDestination(p){return Number.isFinite(p.lat)&&Number.isFinite(p.lng)?`${p.lat},${p.lng}`:p.name+' Kuantan';}
+function openNavigation(provider,id){
+  const p=all.find(x=>x.id===id); if(!p)return;
+  const platform=mobilePlatform(); const dest=appDestination(p);
+  let appUrl='', fallback='';
+  if(provider==='google'){
+    fallback=googleNav(p);
+    if(platform==='android') appUrl=`google.navigation:q=${encodeURIComponent(dest)}&mode=d`;
+    else if(platform==='ios') appUrl=`comgooglemaps://?daddr=${encodeURIComponent(dest)}&directionsmode=driving`;
+    else appUrl=fallback;
+  }else{
+    fallback=wazeNav(p);
+    appUrl=Number.isFinite(p.lat)&&Number.isFinite(p.lng)?`waze://?ll=${p.lat},${p.lng}&navigate=yes`:`waze://?q=${encodeURIComponent(p.name+' Kuantan')}&navigate=yes`;
+  }
+  if(platform==='other'){window.location.href=fallback;return;}
+  let hidden=false;
+  const onVisibility=()=>{if(document.hidden)hidden=true;};
+  document.addEventListener('visibilitychange',onVisibility,{once:true});
+  window.location.href=appUrl;
+  setTimeout(()=>{if(!hidden)window.location.href=fallback;},1200);
+}
+let mapped=all.filter(p=>Number.isFinite(p.lat)&&Number.isFinite(p.lng)); let activeCategory='all'; let searchTerm=''; let foodType='all'; let foodUse='all'; let routeLayer=null; const markers={};
+const map=L.map('map',{zoomControl:false,scrollWheelZoom:true}).setView([3.910865,103.3653233],12);
+L.control.zoom({position:'bottomleft'}).addTo(map); L.control.scale({imperial:false,position:'bottomleft'}).addTo(map);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'© OpenStreetMap contributors'}).addTo(map);
+const radiusCircle=L.circle([hotel.lat,hotel.lng],{radius:10000,color:'#d69e2e',weight:2,fillColor:'#d69e2e',fillOpacity:.055,dashArray:'8 8'}).addTo(map).bindTooltip('10 km radius from Swiss-Grand');
+function pinIcon(p){const hotelClass=p.category==='hotel'?' hotel-pin':'';return L.divIcon({className:'',html:`<div class="custom-pin${hotelClass}"><div class="pin-shape" style="background:${COLORS[p.category]}"><span>${p.icon}</span></div></div>`,iconSize:p.category==='hotel'?[52,64]:[38,48],iconAnchor:p.category==='hotel'?[26,58]:[19,43],popupAnchor:[0,-40]});}
+function popupHtml(p){return `<div class="popup"><span class="tag" style="background:${COLORS[p.category]}">${p.label||categoryName(p.category)}</span><h3>${p.name}</h3><p>${p.desc}</p>${p.recommend?`<p><b>Recommended:</b> ${p.recommend}</p>`:''}<div class="popup-grid"><div><b>${p.distance}</b>Location</div><div><b>${p.time}</b>Drive time</div><div><b>${p.duration}</b>Suggested visit</div><div><b>${p.best}</b>Best timing</div></div>${p.verified?`<p style="font-size:10px"><b>Listing basis:</b> ${p.verified}. Ratings and hours are live in Google Maps.</p>`:''}<div class="popup-actions"><button onclick="openNavigation('google','${p.id}')">Google Maps ↗</button><button onclick="openNavigation('waze','${p.id}')">Waze ↗</button><button onclick="showQR('${p.id}')">QR Code</button></div></div>`}
+function addMarker(p){
+  if(markers[p.id]||!Number.isFinite(p.lat)||!Number.isFinite(p.lng)) return;
+  const marker=L.marker([p.lat,p.lng],{icon:pinIcon(p),title:p.name}).bindPopup(popupHtml(p));
+  markers[p.id]=marker;
+  if(p.category==='hotel'||activeCategory==='all'||p.category===activeCategory) marker.addTo(map);
+}
+mapped.forEach(addMarker);
+
+const plotStatus=L.control({position:'topright'});
+plotStatus.onAdd=function(){const d=L.DomUtil.create('div','plot-status');d.style.cssText='background:rgba(255,255,255,.94);padding:7px 10px;border-radius:10px;box-shadow:0 4px 16px rgba(0,0,0,.16);font:600 11px/1.35 system-ui;color:#073b4c;max-width:190px';d.textContent=`Map pins: ${mapped.length}/${all.length}`;return d};
+plotStatus.addTo(map);
+function updatePlotStatus(text){if(plotStatus&&plotStatus._container)plotStatus._container.textContent=text||`Map pins: ${mapped.length}/${all.length}`;}
+function kmBetween(a,b,c,d){const R=6371,toRad=x=>x*Math.PI/180;const x=toRad(c-a),y=toRad(d-b);const q=Math.sin(x/2)**2+Math.cos(toRad(a))*Math.cos(toRad(c))*Math.sin(y/2)**2;return 2*R*Math.asin(Math.sqrt(q));}
+async function geocodeOne(p){
+  const cacheKey='kuantan-pin-'+p.id;
+  try{const cached=JSON.parse(localStorage.getItem(cacheKey)||'null');if(cached&&Number.isFinite(cached.lat)&&Number.isFinite(cached.lng))return cached}catch(e){}
+  const queries=[`${p.name}, Kuantan, Pahang, Malaysia`,`${p.name}, Balok, Pahang, Malaysia`];
+  for(const q of queries){
+    try{
+      const url='https://nominatim.openstreetmap.org/search?format=jsonv2&limit=5&countrycodes=my&addressdetails=1&q='+encodeURIComponent(q);
+      const res=await fetch(url,{headers:{'Accept':'application/json'}});if(!res.ok)continue;
+      const rows=await res.json();
+      const valid=rows.map(r=>({lat:Number(r.lat),lng:Number(r.lon),label:r.display_name||''})).filter(r=>Number.isFinite(r.lat)&&Number.isFinite(r.lng)).sort((u,v)=>kmBetween(hotel.lat,hotel.lng,u.lat,u.lng)-kmBetween(hotel.lat,hotel.lng,v.lat,v.lng));
+      const hit=valid.find(r=>p.category!=='food'||kmBetween(hotel.lat,hotel.lng,r.lat,r.lng)<=12);
+      if(hit){localStorage.setItem(cacheKey,JSON.stringify(hit));return hit;}
+    }catch(e){}
+  }
+  return null;
+}
+async function geocodeMissingPlaces(){
+  const missing=all.filter(p=>!Number.isFinite(p.lat)||!Number.isFinite(p.lng));
+  let resolved=0;
+  for(let i=0;i<missing.length;i++){
+    const p=missing[i];updatePlotStatus(`Locating ${i+1}/${missing.length}: ${p.name}`);
+    const hit=await geocodeOne(p);
+    if(hit){p.lat=hit.lat;p.lng=hit.lng;p.autoLocated=true;mapped.push(p);addMarker(p);resolved++;}
+    await new Promise(r=>setTimeout(r,650));
+  }
+  updatePlotStatus(`Map pins: ${mapped.length}/${all.length}${resolved?' · '+resolved+' added':''}`);
+  renderPlaces();
+}
+
+const nearestMosque=places.find(p=>p.category==='mosque');
+L.polyline([[hotel.lat,hotel.lng],[nearestMosque.lat,nearestMosque.lng]],{color:COLORS.mosque,weight:5,opacity:.8,dashArray:'8 7'}).addTo(map).bindTooltip('Nearest Prayer Location');
+function categoryName(c){return {hotel:'Starting Point',mosque:'Prayer Location',nature:'Beach & Nature',culture:'Culture & Heritage',city:'City & Evening',food:'Food & Dining'}[c]}
+function renderFilters(){if(!document.getElementById('filters')) return; const cats=[['all','All locations','#073b4c'],['mosque','Prayer',COLORS.mosque],['nature','Beaches & nature',COLORS.nature],['culture','Culture & heritage',COLORS.culture],['city','City & evening',COLORS.city],['food','Food & dining',COLORS.food]];document.getElementById('filters').innerHTML=cats.map(([id,n,c])=>`<button class="filter ${activeCategory===id?'active':''}" onclick="setFilter('${id}')"><i class="dot" style="background:${c}"></i>${n}</button>`).join('')}
+function getFavourites(){try{return JSON.parse(localStorage.getItem('kuantanGuideFavs')||'[]')}catch(e){return[]}}
+function isFavourite(id){return getFavourites().includes(id)}
+function toggleFavourite(id){const f=getFavourites();const n=f.includes(id)?f.filter(x=>x!==id):[...f,id];localStorage.setItem('kuantanGuideFavs',JSON.stringify(n));renderPlaces();renderTopPicks()}
+function sharePlace(id){const p=all.find(x=>x.id===id);const text=`${p.name} — ${p.desc}
+Google Maps: ${googleNav(p)}
+Waze: ${wazeNav(p)}`;window.open(`https://wa.me/?text=${encodeURIComponent(text)}`,'_blank','noopener')}
+function renderTopPicks(){const el=document.getElementById('topPicks');if(!el)return;el.innerHTML=topPickConfig.map(x=>{const p=all.find(y=>y.id===x.id);if(!p)return'';return `<div class="top-pick"><span class="pick-label">${x.label}</span><b>${p.icon} ${p.name}</b><small>${x.note}</small><div class="top-pick-actions"><button onclick="openNavigation('google','${p.id}')">Google</button><button onclick="openNavigation('waze','${p.id}')">Waze</button><button class="${isFavourite(p.id)?'fav-on':''}" onclick="toggleFavourite('${p.id}')">★</button><button onclick="sharePlace('${p.id}')">Share</button></div></div>`}).join('')}
+function renderPlaces(){
+  const data=places.filter(p=>(activeCategory==='all'||p.category===activeCategory)&&(p.category!=='food'||((foodType==='all'||p.type===foodType)&&(foodUse==='all'||p.use===foodUse)))&&(!searchTerm||(p.name+' '+p.desc+' '+p.best+' '+(p.recommend||'')).toLowerCase().includes(searchTerm)));
+  const toolbar=document.getElementById('foodToolbar');
+  const count=document.getElementById('directoryCount');
+  if(toolbar) toolbar.style.display=activeCategory==='food'?'grid':'none';
+  if(count) count.textContent=activeCategory==='food'?`${data.length} curated dining entries shown · grouped by cuisine.`:'';
+  const card=p=>`<div class="place-card" onclick="focusPlace('${p.id}')"><div class="place-icon" style="background:${p.type==='seafood'?'#0e7490':COLORS[p.category]}">${p.icon}</div><div><h3>${p.name}</h3><p>${p.desc}</p><div class="place-meta">${p.distance} · ${p.time} · ${p.duration}${Number.isFinite(p.lat)&&Number.isFinite(p.lng)?' · 📍 Map pin':' · ⏳ Locating pin'}</div>${p.category==='food'?`<div class="badge-row"><span class="pill">${p.type||'dining'}</span><span class="pill">${p.use||'general'}</span><span class="pill live">Google live details</span></div>`:''}</div><div style="display:flex;gap:5px;align-items:center;flex-wrap:wrap;justify-content:flex-end"><button class="mini-btn" title="Open Google Maps from current location" onclick="event.stopPropagation();openNavigation('google','${p.id}')">G</button><button class="mini-btn" title="Open Waze from current location" onclick="event.stopPropagation();openNavigation('waze','${p.id}')">W</button><button class="mini-btn" title="Show QR code" onclick="event.stopPropagation();showQR('${p.id}')">▦</button><button class="mini-btn ${isFavourite(p.id)?'fav-on':''}" title="Save favourite" onclick="event.stopPropagation();toggleFavourite('${p.id}')">★</button><button class="mini-btn" title="Share on WhatsApp" onclick="event.stopPropagation();sharePlace('${p.id}')">↗</button></div></div>`;
+  if(activeCategory!=='food'){
+    document.getElementById('placeList').innerHTML=data.map(card).join('');
+    return;
+  }
+  const groups=[
+    ['seafood','🦐 Seafood & Ikan Bakar','Coastal seafood, shellfish and shared dinner options'],
+    ['local','🍛 Local & Malay Food','Traditional meals, rice dishes and local favourites'],
+    ['thai','🍲 Thai & Tom Yam','Family-style Thai meals and shared dishes'],
+    ['cafe','☕ Coffee, Cafés & Desserts','Coffee breaks, pastries and relaxed conversation'],
+    ['breakfast','🍳 Breakfast & Morning Stops','Early meals before the official programme'],
+    ['resort','🏨 Resort Dining','On-site convenience for staff and organised groups'],
+    ['quick','🍗 Quick Meals & Takeaway','Fast and practical meal options'],
+    ['snack','🐟 Keropok Lekor & Local Snacks','Traditional fish crackers and easy takeaway stops'],
+    ['essential','⛽ Petrol & Travel Essentials','Fuel, toilets and convenience stops']
+  ];
+  const html=groups.map(([type,title,desc])=>{
+    const items=data.filter(p=>p.type===type);
+    if(!items.length) return '';
+    return `<section class="food-group ${type}"><div class="food-group-head"><div><h3>${title}</h3><span>${desc}</span></div><span>${items.length} place${items.length===1?'':'s'}</span></div><div class="food-group-grid">${items.map(card).join('')}</div></section>`;
+  }).join('');
+  const ungrouped=data.filter(p=>!groups.some(g=>g[0]===p.type));
+  document.getElementById('placeList').innerHTML=html+(ungrouped.length?`<section class="food-group"><div class="food-group-head"><h3>Other Dining</h3><span>${ungrouped.length} places</span></div><div class="food-group-grid">${ungrouped.map(card).join('')}</div></section>`:'');
+}
+function renderItineraries(){document.getElementById('itineraries').innerHTML=itineraries.map((r,i)=>`<section class="panel itinerary" style="border-left-color:${r.color}"><h3>${r.name}</h3><p>${r.desc}</p><div class="route-seq">${r.stops.map((id,j)=>`${j?'<b>→</b>':''}<span>${all.find(x=>x.id===id).icon} ${id==='hotel'?'Resort':all.find(x=>x.id===id).name.replace('Pantai ','')}</span>`).join('')}</div><div class="route-stats"><span>🚗 ${r.distance}</span><span>⏱ ${r.time}</span></div><button class="btn route-btn" onclick="showItinerary(${i})">Show route on map</button></section>`).join('')}
+function setFilter(c){activeCategory=c;Object.values(markers).forEach(m=>map.removeLayer(m));mapped.forEach(p=>{if(p.category==='hotel'||c==='all'||p.category===c)markers[p.id].addTo(map)});renderFilters();renderPlaces();if(c==='food'){map.fitBounds(radiusCircle.getBounds().pad(.03));}else if(c!=='all')focusCategory(c);else showAll()}
+function focusPlace(id){const p=all.find(x=>x.id===id);if(!Number.isFinite(p.lat)||!Number.isFinite(p.lng)){openNavigation('google',id);return;}map.flyTo([p.lat,p.lng],14,{duration:1});markers[id].openPopup();if(window.innerWidth<901)document.getElementById('mapSection').scrollIntoView({behavior:'smooth'})}
+function focusHotel(){focusPlace('hotel')}
+function focusCategory(c){const ps=mapped.filter(p=>p.category==='hotel'||p.category===c);map.fitBounds(L.latLngBounds(ps.map(p=>[p.lat,p.lng])).pad(.25));}
+function showAll(){map.fitBounds(L.latLngBounds(mapped.map(p=>[p.lat,p.lng])).pad(.1));}
+function showItinerary(i){if(routeLayer)map.removeLayer(routeLayer);const r=itineraries[i];const coords=r.stops.map(id=>{const p=all.find(x=>x.id===id);return[p.lat,p.lng]});routeLayer=L.polyline(coords,{color:r.color,weight:6,opacity:.85,dashArray:'2 10',lineCap:'round'}).addTo(map);routeLayer.bindTooltip(r.name,{sticky:true});map.fitBounds(routeLayer.getBounds().pad(.15));if(window.innerWidth<901)document.getElementById('mapSection').scrollIntoView({behavior:'smooth'})}
+function showQR(id){const p=all.find(x=>x.id===id);const g=googleNav(p);document.getElementById('modalTitle').textContent=p.name;document.getElementById('modalLink').onclick=()=>openNavigation('google',id);document.getElementById('modalWaze').onclick=()=>openNavigation('waze',id);const q=document.getElementById('qrCode');q.innerHTML='';new QRCode(q,{text:g,width:150,height:150,colorDark:'#073b4c',colorLight:'#ffffff',correctLevel:QRCode.CorrectLevel.M});document.getElementById('qrModal').classList.add('open')}
+function closeModal(){document.getElementById('qrModal').classList.remove('open')}
+async function loadWeather(){try{const u='https://api.open-meteo.com/v1/forecast?latitude=3.910865&longitude=103.3653233&current=temperature_2m,apparent_temperature,weather_code,wind_speed_10m&timezone=Asia%2FKuala_Lumpur';const d=await fetch(u).then(r=>r.json());const c=d.current;document.getElementById('weatherTemp').textContent=Math.round(c.temperature_2m)+'°C';const codes={0:['☀️','Clear'],1:['🌤️','Mainly clear'],2:['⛅','Partly cloudy'],3:['☁️','Overcast'],45:['🌫️','Fog'],51:['🌦️','Light drizzle'],61:['🌧️','Rain'],63:['🌧️','Moderate rain'],65:['⛈️','Heavy rain'],80:['🌦️','Rain showers'],95:['⛈️','Thunderstorm']};const w=codes[c.weather_code]||['🌦️','Variable conditions'];document.getElementById('weatherIcon').textContent=w[0];document.getElementById('weatherText').textContent=w[1]+' · Feels '+Math.round(c.apparent_temperature)+'°C';document.getElementById('weatherWind').textContent='Wind '+Math.round(c.wind_speed_10m)+' km/h'}catch(e){document.getElementById('weatherText').textContent='Live weather unavailable';}}
+document.getElementById('placeSearch').addEventListener('input',e=>{searchTerm=e.target.value.trim().toLowerCase();renderPlaces()});document.getElementById('foodType').addEventListener('change',e=>{foodType=e.target.value;renderPlaces()});document.getElementById('foodUse').addEventListener('change',e=>{foodUse=e.target.value;renderPlaces()});renderPlaces();renderTopPicks();renderItineraries();loadWeather();showAll();geocodeMissingPlaces();
+</script>
+</body>
+</html>
